@@ -14,8 +14,15 @@ use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Front\MessageController;
 use App\Http\Controllers\Front\OrderController;
 use App\Http\Controllers\Front\ProductController;
-use App\Models\Admin;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+// Handle Not found Routes
+Route::fallback(function () {
+    if (Auth::guard('admin')->check())
+        return to_route('dashboard');
+    return to_route('home');
+});
 
 // Auth Routes
 Route::controller(AuthController::class)->group(function () {
@@ -76,6 +83,3 @@ Route::middleware("auth:admin")->prefix("admin/")->group(function () {
         Route::put("{order}", 'changeStatusToDelivered')->name('adminOrders.changeStatus');
     });
 });
-
-// !For debugging
-// Admin::create(['name' => 'Mazen Sheeha', "password" => bcrypt("123123"), 'email' => 'admin@admin.com']);
