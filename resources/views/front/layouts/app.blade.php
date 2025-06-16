@@ -149,14 +149,19 @@
             <div class="footer_column fade-in">
                 <h2>Get In Touch</h2>
                 <ul>
-                    @php
-                        $onlyDigits = preg_replace('/\D/', '', $information->phone);
-                        $telPhone = strlen($onlyDigits) === 10 ? '+1' . $onlyDigits : '+' . $onlyDigits;
-                    @endphp
-                    <li>
-
-                        <a href="tel:{{ $telPhone }}">{{ $information->phone }}</a>
-                    </li>
+                    @if ($information->phone)
+                        @php
+                            $onlyDigits = preg_replace('/\D/', '', $information->phone);
+                            $telPhone = strlen($onlyDigits) === 10 ? '+1' . $onlyDigits : '+' . $onlyDigits;
+                        @endphp
+                        <li>
+                            <a href="tel:{{ $telPhone }}">{{ $information->phone }}</a>
+                        </li>
+                    @else
+                        <li>
+                            <a href="tel:{{ $telPhone }}">+1 (313) 799-1066</a>
+                        </li>
+                    @endif
                     @if ($information->email)
                         <li>
                             <a href="mailto:{{ $information->email }}">{{ $information->email }}
