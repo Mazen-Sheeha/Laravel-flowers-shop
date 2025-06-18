@@ -27,7 +27,7 @@
             </div>
             <div class="items" style="margin: 30px 0">
                 @foreach ($products as $product)
-                    <a href="{{ route('products.show', $product->id) }}" class="item fade-in">
+                    <div class="item fade-in">
                         <div>
                             {{ $product->offer() }}
                             <div class="image_container">
@@ -61,7 +61,7 @@
                                 </div>
                             @endif
                         </div>
-                    </a>
+                    </div>
                 @endforeach
             </div>
             <a href="{{ route('products.index') }}"
